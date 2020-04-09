@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.in1.workshopmongo.domain.User;
@@ -33,15 +34,16 @@ public class UserService {
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
-	/*
-	public void delete(Long id) {
+	
+	public void delete(String id) {
 		try {
 			repository.deleteById(id);
 		}
 		catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException(id);
+			throw new ObjectNotFoundException(id);
 		}
-		catch (DataIntegrityViolationException e) {
+	}	
+	/*		catch (DataIntegrityViolationException e) {
 			 throw new DatabaseException(e.getMessage());
 		}
 	}
